@@ -13,6 +13,11 @@ import com.google.android.gms.location.LocationServices
 import com.weather.forecast.utils.Constants.CONNECTION_FAILURE_RESOLUTION_REQUEST
 import com.weather.forecast.utils.Logger
 
+/**
+ * This is provider class for providing device current location
+ * @param context
+ * @param locationReceived
+ */
 class FusedLocationServiceProvider(
     private val context: Context,
     private val locationReceived: ILocationRecieved
@@ -22,6 +27,9 @@ class FusedLocationServiceProvider(
     private lateinit var googleApiClient: GoogleApiClient
     private lateinit var locationRequest: LocationRequest
 
+    /**
+     * method used for configuring google client for location service
+     */
     fun configure() {
         googleApiClient = GoogleApiClient.Builder(context)
             // The next two lines tell the new client that “this” current class will handle connection stuff
@@ -38,12 +46,18 @@ class FusedLocationServiceProvider(
             .setFastestInterval((1 * 1000).toLong()) // 1 second, in milliseconds
     }
 
+    /**
+     * method is used for connecting google client
+     */
     fun connect() {
         //Now lets connect to the API
         if (::googleApiClient.isInitialized)
             googleApiClient.connect()
     }
 
+    /**
+     * method is used for disconnecting google client
+     */
     fun disconnect() {
         //Disconnect from API onPause()
         if (::googleApiClient.isInitialized && googleApiClient.isConnected) {
@@ -52,6 +66,9 @@ class FusedLocationServiceProvider(
         }
     }
 
+    /**
+     * Failure callback
+     */
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
         /*
              * Google Play services can resolve some errors it detects.
@@ -91,6 +108,9 @@ class FusedLocationServiceProvider(
         }
     }
 
+    /**
+     * method triggers when device location change occurs
+     */
     override fun onLocationChanged(location: Location?) {
         locationReceived.sendDeviceCurrentLocation(
             DeviceLocation(
@@ -100,6 +120,9 @@ class FusedLocationServiceProvider(
         )
     }
 
+    /**
+     * method is called when google client connect
+     */
     override fun onConnected(bundle: Bundle?) {
         val location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
         if (location == null) {

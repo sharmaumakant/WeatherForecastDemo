@@ -1,5 +1,8 @@
 package com.weather.forecast.utils
 
+/**
+ * constants class
+ */
 object Constants {
     // api base url
     const val Base_URL = "http://api.openweathermap.org/data/2.5/"

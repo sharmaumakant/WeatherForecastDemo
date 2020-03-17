@@ -11,13 +11,18 @@ import com.weather.forecast.model.location.DeviceLocation
 import com.weather.forecast.model.network.WeatherForecastServiceAccess
 import com.weather.forecast.utils.Constants.App_ID
 
+/**
+ * Viewmodel class
+ */
 class WeatherForecastViewModel(
     application: Application,
     private val weatherForecastRepository: WeatherForecastRepository,
     private val weatherForecastServiceAccess: WeatherForecastServiceAccess
 ) : AndroidViewModel(application) {
 
-    /* Factory for creating FeatureViewModel instances */
+    /**
+     * Factory for creating FeatureViewModel instances
+     */
     class Factory(
         private val application: Application,
         private val repository: WeatherForecastRepository,
@@ -32,10 +37,17 @@ class WeatherForecastViewModel(
         }
     }
 
+    /**
+     * accessing weather forecast information using repository
+     */
     suspend fun getWeatherForecast(): LiveData<WeatherForecast> {
         return weatherForecastRepository.getWeatherForecast()
     }
 
+    /**
+     * accessing weather forecast using api call
+     * @param deviceLocation
+     */
     fun fetchWeatherForecast(deviceLocation: DeviceLocation) {
         weatherForecastServiceAccess.fetchWeatherForecast(
             deviceLocation.latitude,

@@ -2,6 +2,10 @@ package com.weather.forecast.model.data
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * data class weather forecast response
+ * response is parsed into this class fields
+ */
 data class WeatherForecastResponse(
     val coord: Coord,
     val weather: List<Weather>,
@@ -17,10 +21,19 @@ data class WeatherForecastResponse(
     val cod: Int
 )
 
+/**
+ * data class for weather information
+ */
 data class Clouds(@SerializedName("all") val all: Int)
 
+/**
+ * data class for co-ordinate information
+ */
 data class Coord(@SerializedName("lon") val lon: Double, @SerializedName("lat") val lat: Double)
 
+/**
+ * data class for temperature information
+ */
 data class Main(
     @SerializedName("temp") val temp: Double,
     @SerializedName("feels_like") val feels_like: Double,
@@ -30,6 +43,9 @@ data class Main(
     @SerializedName("humidity") val humidity: Int
 )
 
+/**
+ * data class for Sys
+ */
 data class Sys(
     @SerializedName("type") val type: Int,
     @SerializedName("id") val id: Int,
@@ -38,6 +54,9 @@ data class Sys(
     @SerializedName("sunset") val sunset: Int
 )
 
+/**
+ * data class for Weather information
+ */
 data class Weather(
     @SerializedName("id") val id: Int,
     @SerializedName("main") val main: String,
@@ -45,6 +64,9 @@ data class Weather(
     @SerializedName("icon") val icon: String
 )
 
+/**
+ * data class for wind information
+ */
 data class Wind(
     @SerializedName("speed") val speed: Double,
     @SerializedName("deg") val deg: Int

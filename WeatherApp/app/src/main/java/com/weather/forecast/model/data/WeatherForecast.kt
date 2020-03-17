@@ -3,6 +3,10 @@ package com.weather.forecast.model.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * WeatherForecast is a data class
+ * It is mapped with table named 'weather_forecast_table'
+ */
 @Entity(tableName = "weather_forecast_table")
 data class WeatherForecast(
     var locationName: String?,

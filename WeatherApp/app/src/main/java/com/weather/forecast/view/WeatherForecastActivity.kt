@@ -25,7 +25,9 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 
-
+/**
+ * Activity class
+ */
 class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
 
     private lateinit var weatherForecastViewModel: WeatherForecastViewModel
@@ -49,24 +51,36 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
         }
     }
 
+    /**
+     * android activity lifecycle method :: onResume
+     */
     override fun onResume() {
         super.onResume()
         if (::fusedLocationServiceProvider.isInitialized)
             fusedLocationServiceProvider.connect()
     }
 
+    /**
+     * android activity lifecycle method :: onPause
+     */
     override fun onPause() {
         super.onPause()
         if (::fusedLocationServiceProvider.isInitialized)
             fusedLocationServiceProvider.disconnect()
     }
 
+    /**
+     * android activity lifecycle method :: onDestroy
+     */
     override fun onDestroy() {
         super.onDestroy()
         if (::weatherForecastHandler.isInitialized)
             weatherForecastHandler.removeCallbacks(weatherForecastRunnable)
     }
 
+    /**
+     * android method
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -79,6 +93,9 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
             initialize()
     }
 
+    /**
+     * used for initialization process
+     */
     private fun initialize() {
         val weatherForecastRepository = WeatherForecastRepository(application)
         val weatherForecastServiceAccess =
@@ -93,6 +110,9 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
         fusedLocationServiceProvider.configure()
     }
 
+    /**
+     * @param deviceLocation
+     */
     override fun sendDeviceCurrentLocation(deviceLocation: DeviceLocation) {
         fetchWeatherForecast(deviceLocation)
         weatherForecastHandler = Handler()
@@ -104,6 +124,9 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
         weatherForecastHandler.postDelayed(weatherForecastRunnable, Frequency)
     }
 
+    /**
+     * @param deviceLocation
+     */
     private fun fetchWeatherForecast(deviceLocation: DeviceLocation) {
         if (getWifiManager().isWifiEnabled) {
             CoroutineScope(IO).launch {
@@ -120,6 +143,9 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
         }
     }
 
+    /**
+     * update ui
+     */
     private fun updateUI() {
         // update ui on main thread
         CoroutineScope(Main).launch {

@@ -10,10 +10,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
+/**
+ * This is a wrapper class used to access weather forecast information using retrofit client library
+ */
 class WeatherForecastServiceAccess(
     private val apiClient: Retrofit,
     private val weatherForecastRepository: WeatherForecastRepository) : IWeatherForecast {
 
+    /**
+     * retrofit api call to fatch weather forecast information
+     * @param latitude
+     * @param longitude
+     * @param appId
+     */
     override fun fetchWeatherForecast(latitude: Double?, longitude: Double?, appId: String) {
 
         val weatherForecastService = apiClient.create(WeatherForecastService::class.java)
@@ -24,6 +33,9 @@ class WeatherForecastServiceAccess(
                 appId = App_ID
             )
             .enqueue(object : Callback<WeatherForecastResponse> {
+                /**
+                 * on successful api call
+                 */
                 override fun onResponse(
                     call: Call<WeatherForecastResponse>,
                     response: Response<WeatherForecastResponse>
@@ -55,6 +67,9 @@ class WeatherForecastServiceAccess(
                     )
                 }
 
+                /**
+                 * on api failure
+                 */
                 override fun onFailure(call: Call<WeatherForecastResponse>, throwable: Throwable) {
                     Logger.error(
                         WeatherForecastServiceAccess::class.simpleName,

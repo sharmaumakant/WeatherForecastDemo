@@ -7,26 +7,37 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-
+/**
+ * A repository class used to access database
+ * @param application
+ */
 class WeatherForecastRepository(application: Application) {
 
     private val weatherForecastDatabase = WeatherForecastDatabase(application)
     private var weatherForecastDao: WeatherForecastDao =
         weatherForecastDatabase.weatherForecastDao()
 
+    /**
+     * @param weatherForecast
+     */
     fun insert(weatherForecast: WeatherForecast) {
         CoroutineScope(IO).launch {
             weatherForecastDao.insert(weatherForecast)
         }
     }
 
-    // for future use for updating database call
+    /**
+     * @param weatherForecast
+     */
     fun update(weatherForecast: WeatherForecast) {
         CoroutineScope(IO).launch {
             weatherForecastDao.update(weatherForecast)
         }
     }
 
+    /**
+     * suspend function used to fetch weather data
+     */
     suspend fun getWeatherForecast(): LiveData<WeatherForecast> {
         val result = CoroutineScope(IO).async {
             getWeatherForecastAsync()
@@ -34,6 +45,9 @@ class WeatherForecastRepository(application: Application) {
         return result.await()
     }
 
+    /**
+     * method is used to fetch weather data stored into weather database
+     */
     private fun getWeatherForecastAsync(): LiveData<WeatherForecast> {
         return weatherForecastDao.getWeatherForecast()
     }

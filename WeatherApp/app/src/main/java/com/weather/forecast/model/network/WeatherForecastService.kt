@@ -6,8 +6,14 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
+/**
+ * Ths interface is used in retrofit api call and resolved by that library only
+ */
 interface WeatherForecastService {
 
+    /**
+     * GET api call
+     */
     @GET("weather")
     fun getWeatherForecast(
         @Query("lat") latitude: Double?,
