@@ -1,4 +1,4 @@
-package model.service
+package com.weather.forecast.model.service
 
 import com.weather.forecast.model.data.WeatherForecastRepository
 import com.weather.forecast.model.network.ApiClient
