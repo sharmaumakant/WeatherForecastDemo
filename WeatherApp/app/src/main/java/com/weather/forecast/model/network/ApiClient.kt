@@ -1,6 +1,6 @@
 package com.weather.forecast.model.network
 
-import com.weather.forecast.utils.Base_URL
+import com.weather.forecast.utils.Constants.Base_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

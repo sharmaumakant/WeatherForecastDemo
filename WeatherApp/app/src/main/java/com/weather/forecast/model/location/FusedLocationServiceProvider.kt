@@ -10,7 +10,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationListener
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.weather.forecast.utils.CONNECTION_FAILURE_RESOLUTION_REQUEST
+import com.weather.forecast.utils.Constants.CONNECTION_FAILURE_RESOLUTION_REQUEST
 import com.weather.forecast.utils.Logger
 
 class FusedLocationServiceProvider(

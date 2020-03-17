@@ -3,7 +3,7 @@ package com.weather.forecast.model.network
 import com.weather.forecast.model.data.WeatherForecast
 import com.weather.forecast.model.data.WeatherForecastRepository
 import com.weather.forecast.model.data.WeatherForecastResponse
-import com.weather.forecast.utils.App_ID
+import com.weather.forecast.utils.Constants.App_ID
 import com.weather.forecast.utils.Logger
 import retrofit2.Call
 import retrofit2.Callback

@@ -15,8 +15,8 @@ import com.weather.forecast.model.location.FusedLocationServiceProvider
 import com.weather.forecast.model.location.ILocationRecieved
 import com.weather.forecast.model.network.ApiClient
 import com.weather.forecast.model.network.WeatherForecastServiceAccess
-import com.weather.forecast.utils.ACCESS_FINE_LOCATION_REQUEST_CODE
-import com.weather.forecast.utils.Frequency
+import com.weather.forecast.utils.Constants.ACCESS_FINE_LOCATION_REQUEST_CODE
+import com.weather.forecast.utils.Constants.Frequency
 import com.weather.forecast.utils.getWifiManager
 import com.weather.forecast.viewmodel.WeatherForecastViewModel
 import kotlinx.android.synthetic.main.activity_weather_forecast_layout.*

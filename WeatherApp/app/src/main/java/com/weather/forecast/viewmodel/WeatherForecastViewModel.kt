@@ -9,7 +9,7 @@ import com.weather.forecast.model.data.WeatherForecast
 import com.weather.forecast.model.data.WeatherForecastRepository
 import com.weather.forecast.model.location.DeviceLocation
 import com.weather.forecast.model.network.WeatherForecastServiceAccess
-import com.weather.forecast.utils.App_ID
+import com.weather.forecast.utils.Constants.App_ID
 
 class WeatherForecastViewModel(
     application: Application,
