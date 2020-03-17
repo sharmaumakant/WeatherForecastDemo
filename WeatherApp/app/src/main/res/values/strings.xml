@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WeatherForecastDemo</string>
+    <string name="please_check_your_wi_fi">Please check your wi-fi connection</string>
+    <string name="description">Description :</string>
+    <string name="wind_speed">Wind speed :</string>
+    <string name="feels_like">Feels like :</string>
+    <string name="location">Location :</string>
+    <string name="weather">Weather :</string>
+</resources>
