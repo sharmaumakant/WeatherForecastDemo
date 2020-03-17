@@ -12,9 +12,7 @@ import retrofit2.Retrofit
 
 class WeatherForecastServiceAccess(
     private val apiClient: Retrofit,
-    private val weatherForecastRepository: WeatherForecastRepository
-) :
-    IWeatherForecast {
+    private val weatherForecastRepository: WeatherForecastRepository) : IWeatherForecast {
 
     override fun fetchWeatherForecast(latitude: Double?, longitude: Double?, appId: String) {
 
