@@ -7,36 +7,31 @@ import com.weather.forecast.model.network.WeatherForecastServiceAccess
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.junit.MockitoRule
 
 
+@RunWith(MockitoJUnitRunner::class)
 class WeatherForecastViewModelTest {
 
-    @Rule
-    @JvmField
-    var mockitoRule: MockitoRule? = MockitoJUnit.rule()
+    @Rule @JvmField var mockitoRule: MockitoRule? = MockitoJUnit.rule()
+
+    @Mock lateinit var weatherForecastServiceAccess: WeatherForecastServiceAccess
+
+    @Mock lateinit var weatherForecastRepository: WeatherForecastRepository
+
+    @Mock lateinit var application: Application
+
+    @Mock lateinit var deviceLocation: DeviceLocation
 
     private lateinit var weatherForecastViewModel: WeatherForecastViewModel
 
-    @Mock
-    lateinit var weatherForecastServiceAccess: WeatherForecastServiceAccess
-
-    @Mock
-    lateinit var weatherForecastRepository: WeatherForecastRepository
-
-    @Mock
-    lateinit var application: Application
-
-    @Mock
-    lateinit var deviceLocation: DeviceLocation
-
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this);
         weatherForecastViewModel = WeatherForecastViewModel(
             application,
             weatherForecastRepository,
