@@ -1,5 +1,6 @@
 package com.weather.forecast.view
 
+import android.Manifest
 import android.content.pm.ActivityInfo
 import android.view.View
 import android.widget.TextView
@@ -8,6 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.weather.forecast.R
 import com.weather.forecast.model.location.DeviceLocation
+import com.weather.forecast.utils.Constants
 import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -61,11 +63,14 @@ class WeatherForecastActivityTest {
 
     @Test
     fun onPause() {
-        weatherForecastActivity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        weatherForecastActivity?.onBackPressed()
     }
 
     @Test
     fun onRequestPermissionsResult() {
+        weatherForecastActivity?.onRequestPermissionsResult(100, arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION),IntArray(1))
     }
 
     @Test
