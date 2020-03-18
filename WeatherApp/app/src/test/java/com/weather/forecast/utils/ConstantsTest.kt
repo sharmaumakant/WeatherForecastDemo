@@ -5,10 +5,10 @@ import com.weather.forecast.utils.Constants.App_ID
 import com.weather.forecast.utils.Constants.Base_URL
 import com.weather.forecast.utils.Constants.CONNECTION_FAILURE_RESOLUTION_REQUEST
 import com.weather.forecast.utils.Constants.Frequency
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
-import org.junit.Assert.assertEquals
 
 
 @RunWith(MockitoJUnitRunner::class)

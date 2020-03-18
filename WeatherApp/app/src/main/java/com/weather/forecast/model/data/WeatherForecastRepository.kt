@@ -51,4 +51,11 @@ class WeatherForecastRepository(application: Application) {
     private fun getWeatherForecastAsync(): LiveData<WeatherForecast> {
         return weatherForecastDao.getWeatherForecast()
     }
+
+    /**
+     * method is used to fetch weather data count stored into weather database
+     */
+    fun getCount(): Int {
+        return weatherForecastDao.getCount()
+    }
 }

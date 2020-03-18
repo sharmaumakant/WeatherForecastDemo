@@ -3,7 +3,6 @@ package com.weather.forecast.view
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -16,7 +15,6 @@ import com.weather.forecast.model.location.ILocationRecieved
 import com.weather.forecast.model.network.ApiClient
 import com.weather.forecast.model.network.WeatherForecastServiceAccess
 import com.weather.forecast.utils.Constants.ACCESS_FINE_LOCATION_REQUEST_CODE
-import com.weather.forecast.utils.Constants.Frequency
 import com.weather.forecast.utils.getWifiManager
 import com.weather.forecast.viewmodel.WeatherForecastViewModel
 import kotlinx.android.synthetic.main.activity_weather_forecast_layout.*
@@ -31,8 +29,6 @@ import kotlinx.coroutines.launch
 class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
 
     private lateinit var weatherForecastViewModel: WeatherForecastViewModel
-    private lateinit var weatherForecastHandler: Handler
-    private lateinit var weatherForecastRunnable: Runnable
     private lateinit var fusedLocationServiceProvider: FusedLocationServiceProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +39,8 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
             != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION),
                 ACCESS_FINE_LOCATION_REQUEST_CODE
             )
         } else {
@@ -67,15 +64,6 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
         super.onPause()
         if (::fusedLocationServiceProvider.isInitialized)
             fusedLocationServiceProvider.disconnect()
-    }
-
-    /**
-     * android activity lifecycle method :: onDestroy
-     */
-    override fun onDestroy() {
-        super.onDestroy()
-        if (::weatherForecastHandler.isInitialized)
-            weatherForecastHandler.removeCallbacks(weatherForecastRunnable)
     }
 
     /**
@@ -115,13 +103,6 @@ class WeatherForecastActivity : AppCompatActivity(), ILocationRecieved {
      */
     override fun sendDeviceCurrentLocation(deviceLocation: DeviceLocation) {
         fetchWeatherForecast(deviceLocation)
-        weatherForecastHandler = Handler()
-        weatherForecastRunnable = Runnable {
-            fetchWeatherForecast(deviceLocation)
-            weatherForecastHandler.postDelayed(weatherForecastRunnable, Frequency)
-        }
-        // schedule service to fetch weather forecast in every 2 hours
-        weatherForecastHandler.postDelayed(weatherForecastRunnable, Frequency)
     }
 
     /**

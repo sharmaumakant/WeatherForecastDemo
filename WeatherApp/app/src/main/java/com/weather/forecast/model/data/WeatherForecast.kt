@@ -9,19 +9,16 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "weather_forecast_table")
 data class WeatherForecast(
+    @PrimaryKey val ID: Long? = 1,
     var locationName: String?,
     var windSpeed: Double?,
-    var windDeg: Int,
-    var dt: Int,
-    var sunRise: Int,
-    var sunSet: Int,
-    var timezone: Int,
-    var currentTemp: Double,
-    var timeStamp: Long,
-    var description: String,
-    var feelsLike: Double,
-    var weatherType: String
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-}
+    var windDeg: Int?,
+    var dt: Int?,
+    var sunRise: Int?,
+    var sunSet: Int?,
+    var timezone: Int?,
+    var currentTemp: Double?,
+    var description: String?,
+    var feelsLike: Double?,
+    var weatherType: String?
+)
