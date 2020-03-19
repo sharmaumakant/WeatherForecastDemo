@@ -145,13 +145,4 @@ class FusedLocationServiceProvider(
     override fun onConnectionSuspended(p0: Int) {
         TODO("not implemented")
     }
-
-    fun getLastKnownLocation(): DeviceLocation{
-
-        var location =  LocationServices.FusedLocationApi.getLastLocation(googleApiClient)
-        return DeviceLocation(
-            location?.latitude,
-            location?.longitude
-        )
-    }
 }
