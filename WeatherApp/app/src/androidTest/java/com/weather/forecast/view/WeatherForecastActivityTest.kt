@@ -1,15 +1,17 @@
 package com.weather.forecast.view
 
 import android.Manifest
-import android.content.pm.ActivityInfo
 import android.view.View
 import android.widget.TextView
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.weather.forecast.R
 import com.weather.forecast.model.location.DeviceLocation
-import com.weather.forecast.utils.Constants
 import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -31,6 +33,12 @@ class WeatherForecastActivityTest {
     @Before
     fun setup(){
         weatherForecastActivity = activityTestRule.activity
+    }
+
+    @Test
+    fun allViewsDisplayedTest() {
+        Espresso.onView(withId(R.id.weatherLayout))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
@@ -63,7 +71,7 @@ class WeatherForecastActivityTest {
 
     @Test
     fun onPause() {
-        weatherForecastActivity?.onBackPressed()
+        weatherForecastActivity?.moveTaskToBack(true)
     }
 
     @Test
